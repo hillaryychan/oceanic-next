@@ -26,7 +26,7 @@
   endif
 "}}}
 " {{{ Colors
-  let s:base00 = ['#1b2b34', '235']
+  let s:base00 = ['#383838', '235']
   let s:base01 = ['#343d46', '237']
   let s:base02 = ['#4f5b66', '240']
   let s:base03 = ['#65737e', '243']
@@ -34,13 +34,13 @@
   let s:base05 = ['#c0c5ce', '251']
   let s:base06 = ['#cdd3de', '252']
   let s:base07 = ['#d8dee9', '253']
-  let s:red    = ['#ec5f67', '203']
+  let s:red    = ['#f4636B', '203']
   let s:orange = ['#f99157', '209']
   let s:yellow = ['#fac863', '221']
-  let s:green  = ['#99c794', '114']
-  let s:cyan   = ['#62b3b2', '73']
-  let s:blue   = ['#6699cc', '68']
-  let s:purple = ['#c594c5', '176']
+  let s:green  = ['#87d67f', '114']
+  let s:cyan   = ['#69d2cf', '73']
+  let s:blue   = ['#00afff', '68']
+  let s:purple = ['#a981db', '176']
   let s:brown  = ['#ab7967', '137']
   let s:white  = ['#ffffff', '15']
   let s:none   = ['NONE',    'NONE']
@@ -167,10 +167,18 @@ endfunction
   call s:hi('TSVariableBuiltin',          s:red,    '',       '',          '')
   call s:hi('TSLabel',                    s:cyan,   '',       '',          '')
 
-  call s:hi('SpellBad',                   '',       '',       'undercurl', '')
-  call s:hi('SpellLocal',                 '',       '',       'undercurl', '')
-  call s:hi('SpellCap',                   '',       '',       'undercurl', '')
-  call s:hi('SpellRare',                  '',       '',       'undercurl', '')
+" use underlines for vim and tmux, and undercurls for neovim
+if has('nvim') && !exists('$TMUX')
+    call s:hi('SpellBad',                   '',       '',       'undercurl', '')
+    call s:hi('SpellLocal',                 '',       '',       'undercurl', '')
+    call s:hi('SpellCap',                   '',       '',       'undercurl', '')
+    call s:hi('SpellRare',                  '',       '',       'undercurl', '')
+else
+    call s:hi('SpellBad',                   '',       '',       'underline', '')
+    call s:hi('SpellLocal',                 '',       '',       'underline', '')
+    call s:hi('SpellCap',                   '',       '',       'underline', '')
+    call s:hi('SpellRare',                  '',       '',       'underline', '')
+endif
 
   call s:hi('csClass',                    s:yellow, '',       '',          '')
   call s:hi('csAttribute',                s:yellow, '',       '',          '')
@@ -191,11 +199,11 @@ endfunction
   call s:hi('DiffChange',                 s:base03, s:base01, '',          '')
   call s:hi('DiffDelete',                 s:red,    s:base01, '',          '')
   call s:hi('DiffText',                   s:blue,   s:base01, '',          '')
-  call s:hi('DiffAdded',                  s:base07,  s:green,  s:bold,      '')
+  call s:hi('DiffAdded',                  s:green,  s:base00, '',          '')
   call s:hi('DiffFile',                   s:red,    s:base00, '',          '')
   call s:hi('DiffNewFile',                s:green,  s:base00, '',          '')
   call s:hi('DiffLine',                   s:blue,   s:base00, '',          '')
-  call s:hi('DiffRemoved',                s:base07,  s:red,    s:bold,      '')
+  call s:hi('DiffRemoved',                s:red,    s:base00, '',          '')
 
   call s:hi('gitCommitOverflow',          s:red,    '',       '',          '')
   call s:hi('gitCommitSummary',           s:green,  '',       '',          '')
